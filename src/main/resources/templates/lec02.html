@@ -7,9 +7,14 @@
 </head>
 
 <body>
+  <p>
+    <a href="/lec02">lec02.htmlを更新(F5)</a>
+  </p>
   <h1>Lec02 GET!</h1>
   <p>
-    Hi
+  <div th:if="${name}">
+    Hi [[${name}]]
+  </div>
   </p>
   <p>ぐー ちょき ぱー</p>
 </body>
