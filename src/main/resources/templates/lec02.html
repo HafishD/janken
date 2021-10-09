@@ -16,7 +16,18 @@
     Hi [[${name}]]
   </div>
   </p>
-  <p>ぐー ちょき ぱー</p>
+  <p>
+  <div>
+    <a href="/lec02janken?hand=Gu">ぐー</a>
+    <a href="/lec02janken?hand=Choki">ちょき</a>
+    <a href="/lec02janken?hand=Pa">ぱー</a>
+    <div th:if="${result}">
+      あなたの手 [[${hand}]]<br>
+      相手の手 Gu<br>
+      結果 [[${result}]]
+    </div>
+  </div>
+  </p>
 </body>
 
 </html>
