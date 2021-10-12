@@ -8,7 +8,7 @@
 
 <body>
   <p>
-    <a href="/lec02">lec02.htmlを更新(F5)</a>
+    <a href="/logout">ログアウト</a>
   </p>
 
   <script th:inline="javascript" th:if=${janken}>
@@ -21,10 +21,14 @@
   </script>
 
   <h1>Lec02 GET!</h1>
-  <p>
-  <div th:if="${name}">
-    Hi [[${name}]]
+  <p>エントリー</p>
+  <div th:if="${entry}">
+    <ul>
+      <li th:each="player : ${entry.players}">[[${player}]]</li>
+    </ul>
   </div>
+  <p>Hi
+    <span sec:authentication="name"></span>
   </p>
   <p>
   <div>
@@ -33,7 +37,7 @@
     <a href="/lec02janken?hand=Pa">ぱー</a>
     <div th:if="${result}">
       あなたの手 [[${hand}]]<br>
-      <div th:if="${janken}">相手の手 <span id="cpu">ほげほげ</span></div>
+      <div th:if="${janken}">相手の手 <span id="cpu"></span></div>
       結果 [[${result}]]
     </div>
   </div>
