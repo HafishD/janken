@@ -13,6 +13,8 @@ import oit.is.z0407.kaizi.janken.model.Janken;
 import oit.is.z0407.kaizi.janken.model.Entry;
 import oit.is.z0407.kaizi.janken.model.User;
 import oit.is.z0407.kaizi.janken.model.UserMapper;
+import oit.is.z0407.kaizi.janken.model.Match;
+import oit.is.z0407.kaizi.janken.model.MatchMapper;
 
 @Controller
 public class Lec02Controller {
@@ -22,6 +24,9 @@ public class Lec02Controller {
 
   @Autowired
   UserMapper userMapper;
+
+  @Autowired
+  MatchMapper matchMapper;
 
   @GetMapping("/lec02")
   public String lec02(Principal prin, ModelMap model) {
@@ -64,9 +69,11 @@ public class Lec02Controller {
           break;
       }
     }
+    ArrayList<Match> matches = matchMapper.selectAllMatches();
     model.addAttribute("hand", hand);
     model.addAttribute("janken", janken);
     model.addAttribute("result", result);
+    model.addAttribute("matches", matches);
     return "lec02.html";
   }
 

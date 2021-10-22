@@ -48,6 +48,18 @@
       あなたの手 [[${hand}]]<br>
       <div th:if="${janken}">相手の手 <span id="cpu"></span></div>
       結果 [[${result}]]
+      <p th:if="${matches}">
+      <div th:each="match, stat:${matches}">
+        <tr>
+          <td>Index:[[${stat.index}]]</td>
+          <td>ID:[[${match.id}]]</td>
+          <td>ユーザ1:[[${match.user1}]]</td>
+          <td>ユーザ2:[[${match.user2}]]</td>
+          <td>ユーザ1の手:[[${match.user1Hand}]]</td>
+          <td>ユーザ2の手:[[${match.user2Hand}]]</td>
+        </tr>
+      </div>
+      </p>
     </div>
   </div>
   </p>
