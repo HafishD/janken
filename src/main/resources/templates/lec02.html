@@ -22,6 +22,15 @@
 
   <h1>Lec02 GET!</h1>
   <p>エントリー</p>
+  <p th:if="${users}">
+  <div th:each="user, stat:${users}">
+    <tr>
+      <td>Index:[[${stat.index}]]</td>
+      <td>ID:[[${user.id}]]</td>
+      <td>ユーザ名:[[${user.name}]]</td>
+    </tr>
+  </div>
+  </p>
   <div th:if="${entry}">
     <ul>
       <li th:each="player : ${entry.players}">[[${player}]]</li>
