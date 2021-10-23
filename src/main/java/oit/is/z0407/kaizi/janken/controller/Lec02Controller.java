@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+//import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import oit.is.z0407.kaizi.janken.model.Janken;
@@ -77,4 +78,21 @@ public class Lec02Controller {
     return "lec02.html";
   }
 
+  @GetMapping("/match")
+  public String match(@RequestParam Integer enemyId, ModelMap model) {
+    // User enemy = userMapper.selectById(id);
+    ArrayList<User> users = userMapper.selectAllUsers();
+    String enemy = "CPU";
+    for (User u : users) {
+      if (u.getId() == enemyId) {
+        enemy = u.getName();
+        break;
+      }
+    }
+    // ArrayList<Match> matches = matchMapper.selectAllMatches();
+    model.addAttribute("enemy", enemy);
+    // model.addAttribute("users", users);
+    // model.addAttribute("matches", matches);
+    return "match.html";
+  }
 }
