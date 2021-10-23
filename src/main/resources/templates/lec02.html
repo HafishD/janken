@@ -31,9 +31,14 @@
     </tr>
   </div>
   </p>
-  <div th:if="${entry}">
+  <!--<div th:if="${entry}">
     <ul>
       <li th:each="player : ${entry.players}">[[${player}]]</li>
+    </ul>
+  </div>-->
+  <div th:if="${users}">
+    <ul>
+      <li th:each="user : ${users}"><a th:href="@{/match(id=${user.id})}"> [[${user.name}]]</a></li>
     </ul>
   </div>
   <p>Hi
