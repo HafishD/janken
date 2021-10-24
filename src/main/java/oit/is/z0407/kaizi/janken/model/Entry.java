@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class Entry {
   ArrayList<String> players = new ArrayList<>();
+  String user;
 
   public void addUser(String name) {
     for (String s : this.players) {
@@ -23,6 +24,14 @@ public class Entry {
 
   public void setPlayers(ArrayList<String> players) {
     this.players = players;
+  }
+
+  public String getUser() {
+    return this.user;
+  }
+
+  public void setUser(String user) {
+    this.user = user;
   }
 
 }
