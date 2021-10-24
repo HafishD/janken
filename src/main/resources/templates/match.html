@@ -7,8 +7,32 @@
 </head>
 
 <body>
-  <p>あなた: <span sec:authentication="name"></span></p>
-  <p>相手: [[${enemy}]]</p>
+  <p th:if="${entry}">あなた: [[${entry.user}]]</p>
+  <p th:if="${enemy}">相手: [[${enemy}]]</p>
+
+  <script th:inline="javascript" th:if=${janken}>
+    window.onload = function () {
+      var janken = [[${ janken }]];
+      var cpu_hand = janken.cpuHand;
+      document.getElementById("cpu").innerHTML = cpu_hand;
+      console.log(janken);
+    }
+  </script>
+
+  <p>
+  <div>
+    <a href="/matchjanken?hand=Gu&vs=CPU">ぐー</a>
+    <a href="/matchjanken?hand=Choki&vs=CPU">ちょき</a>
+    <a href="/matchjanken?hand=Pa&vs=CPU">ぱー</a>
+    <div th:if="${result}">
+      あなたの手 [[${hand}]]<br>
+      <div th:if="${janken}">相手の手 <span id="cpu"></span></div>
+      結果 [[${result}]]
+    </div>
+  </div>
+  </p>
+
+  <a href="/lec02">もどる</a>
 
 </body>
 
