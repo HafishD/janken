@@ -20,6 +20,8 @@ public class Lec03AuthConfiguration extends WebSecurityConfigurerAdapter {
     auth.inMemoryAuthentication().withUser("player2").password(passwordEncoder().encode("janK3n")).roles("USER");
 
     auth.inMemoryAuthentication().withUser("ほんだ").password(passwordEncoder().encode("p@ss")).roles("USER");
+
+    auth.inMemoryAuthentication().withUser("いがき").password(passwordEncoder().encode("p@ss")).roles("USER");
   }
 
   @Bean
