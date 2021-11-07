@@ -24,7 +24,10 @@ import oit.is.z0407.kaizi.janken.model.MatchInfoMapper;
 public class Lec02Controller {
   String you, eName;
   int yId, eId;
-  String yHand, eHand;
+  int matchId = 3;
+  String yHand = "user1Hand";
+  String eHand;
+  boolean flag = false;
 
   @Autowired
   private Entry entry;
@@ -39,19 +42,17 @@ public class Lec02Controller {
   MatchInfoMapper matchInfoMapper;
 
   @GetMapping("/lec02")
-  @Transactional
   public String lec02(Principal prin, ModelMap model) {
     String loginPlayer = prin.getName();
     this.you = loginPlayer;
     User user = new User();
     user.setName(loginPlayer);
     this.yId = userMapper.selectByName(loginPlayer);
-    // userMapper.insertUser(user);
-    // this.entry.addUser(loginPlayer);
     ArrayList<User> users = userMapper.selectAllUsers();
     ArrayList<Match> matches = matchMapper.selectAllMatches();
+    ArrayList<MatchInfo> matchInfos = matchInfoMapper.selectActiveMatchInfos();
     model.addAttribute("users", users);
-    // model.addAttribute("entry", entry);
+    model.addAttribute("matchInfos", matchInfos);
     model.addAttribute("matches", matches);
     return "lec02.html";
   }
@@ -125,6 +126,7 @@ public class Lec02Controller {
   @GetMapping("/match")
   @Transactional
   public String match(Principal prin, @RequestParam Integer id, ModelMap model) {
+    this.flag = true;
     // User enemy = userMapper.selectById(id);
     String player = prin.getName();
     this.entry.setUser(player);
@@ -138,6 +140,9 @@ public class Lec02Controller {
       }
     }
     this.eName = enemy;
+    MatchInfo matchInfo = new MatchInfo(this.yId, this.eId, this.yHand, this.flag);
+    matchInfoMapper.insertMatchInfo(matchInfo);
+    matchId = matchInfoMapper.activeMatchId();
     model.addAttribute("entry", this.entry);
     model.addAttribute("enemy", enemy);
     return "match.html";
@@ -146,8 +151,8 @@ public class Lec02Controller {
   @GetMapping("/wait")
   @Transactional
   public String waitHand(@RequestParam String hand, ModelMap model) {
-    MatchInfo matchInfo = new MatchInfo(this.yId, this.eId, hand, true);
-    matchInfoMapper.insertMatchInfo(matchInfo);
+    MatchInfo matchInfo = new MatchInfo(this.yId, this.eId, hand, this.flag);
+    matchInfoMapper.updateById(matchInfo);
     model.addAttribute("matchInfo", matchInfo);
     return "wait.html";
   }
