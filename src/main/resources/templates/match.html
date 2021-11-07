@@ -14,11 +14,12 @@
   <p>
     <a href="/wait?hand=Gu">ぐー</a>
     <a href="/wait?hand=Choki">ちょき</a>
-    <a href="/wait?hand=Pa">ぱー</a>
+    <a href="/wait?hand=Pa">ぱー</a><br>
+    <a href="/lec02">もどる</a>
   </p>
 
-  <p th:if="${entry}">あなた: [[${entry.user}]]</p>
-  <p th:if="${enemy}">相手: [[${enemy}]]</p>
+  <!--<p th:if="${entry}">あなた: [[${entry.user}]]</p>
+  <p th:if="${enemy}">相手: [[${enemy}]]</p>-->
 
   <script th:inline="javascript" th:if=${janken}>
     window.onload = function () {
@@ -29,7 +30,7 @@
     }
   </script>
 
-  <p>
+  <!--<p>
   <div>
     <a href="/matchjanken?hand=Gu&vs=CPU">ぐー</a>
     <a href="/matchjanken?hand=Choki&vs=CPU">ちょき</a>
@@ -40,9 +41,7 @@
       結果 [[${result}]]
     </div>
   </div>
-  </p>
-
-  <a href="/lec02">もどる</a>
+  </p>-->
 
 </body>
 
