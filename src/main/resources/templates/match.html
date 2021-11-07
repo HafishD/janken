@@ -7,6 +7,16 @@
 </head>
 
 <body>
+  <h1>Match</h1>
+
+  <h2><span th:if="${entry}">[[${entry.user}]]</span> V.S. <span th:if="${enemy}">[[${enemy}]]</span></h2>
+
+  <p>
+    <a href="/wait?hand=Gu">ぐー</a>
+    <a href="/wait?hand=Choki">ちょき</a>
+    <a href="/wait?hand=Pa">ぱー</a>
+  </p>
+
   <p th:if="${entry}">あなた: [[${entry.user}]]</p>
   <p th:if="${enemy}">相手: [[${enemy}]]</p>
 
