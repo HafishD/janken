@@ -1,5 +1,10 @@
 package oit.is.z0407.kaizi.janken.model;
 
-public class MatchInfoMapper {
-  
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
+
+@Mapper
+public interface MatchInfoMapper {
+  @Insert("INSERT INTO matchInfo (user1, user2, user1Hand, isActive) VALUES (#{user1}, #{user2}, #{user1Hand}, #{isActive});")
+  void insertMatchInfo(MatchInfo matchInfo);
 }

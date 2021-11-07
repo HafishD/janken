@@ -17,9 +17,14 @@ import oit.is.z0407.kaizi.janken.model.User;
 import oit.is.z0407.kaizi.janken.model.UserMapper;
 import oit.is.z0407.kaizi.janken.model.Match;
 import oit.is.z0407.kaizi.janken.model.MatchMapper;
+import oit.is.z0407.kaizi.janken.model.MatchInfo;
+import oit.is.z0407.kaizi.janken.model.MatchInfoMapper;
 
 @Controller
 public class Lec02Controller {
+  String you, eName;
+  int yId, eId;
+  String yHand, eHand;
 
   @Autowired
   private Entry entry;
@@ -30,12 +35,17 @@ public class Lec02Controller {
   @Autowired
   MatchMapper matchMapper;
 
+  @Autowired
+  MatchInfoMapper matchInfoMapper;
+
   @GetMapping("/lec02")
   @Transactional
   public String lec02(Principal prin, ModelMap model) {
     String loginPlayer = prin.getName();
+    this.you = loginPlayer;
     User user = new User();
     user.setName(loginPlayer);
+    this.yId = userMapper.selectByName(loginPlayer);
     // userMapper.insertUser(user);
     // this.entry.addUser(loginPlayer);
     ArrayList<User> users = userMapper.selectAllUsers();
@@ -50,8 +60,10 @@ public class Lec02Controller {
   @Transactional
   public String matchJanken(Principal prin, @RequestParam String hand, @RequestParam String vs, ModelMap model) {
     String result = "NO GAME";
+    this.yHand = hand;
     Janken janken = new Janken();
     String cpuHand = janken.getCpuHand();
+    this.eHand = cpuHand;
     String playerName = prin.getName();
     ArrayList<User> players = userMapper.selectAllUsers();
     int p1Id = 1, p2Id = 2;
@@ -117,6 +129,7 @@ public class Lec02Controller {
     String player = prin.getName();
     this.entry.setUser(player);
     ArrayList<User> users = userMapper.selectAllUsers();
+    this.eId = id;
     String enemy = "CPU";
     for (User u : users) {
       if (u.getId() == id) {
@@ -124,8 +137,18 @@ public class Lec02Controller {
         break;
       }
     }
+    this.eName = enemy;
     model.addAttribute("entry", this.entry);
     model.addAttribute("enemy", enemy);
     return "match.html";
+  }
+
+  @GetMapping("/wait")
+  @Transactional
+  public String waitHand(@RequestParam String hand, ModelMap model) {
+    MatchInfo matchInfo = new MatchInfo(this.yId, this.eId, hand, true);
+    matchInfoMapper.insertMatchInfo(matchInfo);
+    model.addAttribute("matchInfo", matchInfo);
+    return "wait.html";
   }
 }
