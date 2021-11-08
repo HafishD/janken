@@ -9,6 +9,15 @@
 <body>
   <h1>相手の手をまってます</h1>
   <p>Hi <span sec:authentication="name"></span></p>
+
+  <div th:if="${newMatch}">
+    <h2>結果</h2>
+    <p>
+      Match: id [[${newMatch.id}]] user1: [[${newMatch.user1}]] user2: [[${newMatch.user2}]] user1Hand:
+      [[${newMatch.user1Hand}]] user2Hand: [[${newMatch.user2Hand}]]
+    </p>
+    <a href="/lec02">もどる</a>
+  </div>
 </body>
 
 </html>
